@@ -21,7 +21,7 @@
 
         }
     }
-    stage('install terraform 1.3.0') {
+    stage('install terraform 1.3.0.0') {
       steps {
 
         dir('./') {
