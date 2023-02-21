@@ -12,8 +12,4 @@ docker build -t devsecops/jenkins-master .
 docker tag devsecops/jenkins-master:latest 31232132321321.dkr.ecr.us-east-1.amazonaws.com/bar:latest
 
 docker push 32322332131232.dkr.ecr.us-east-1.amazonaws.com/bar:latest
- 588338176709.dkr.ecr.us-east-1.amazonaws.com/bar:latest
-
-cluster
-service
-task definition usando a imagem bar
+ 32352353535253.dkr.ecr.us-east-1.amazonaws.com/bar:latest
