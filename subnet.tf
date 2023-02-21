@@ -38,3 +38,9 @@ resource "aws_route_table_association" "tcb_blog_pub_association" {
   subnet_id      = aws_subnet.tcb_blog_public_subnet.id
   route_table_id = aws_route_table.tcb_blog_rt.id
 }
+
+
+output "subnet" {
+  value       = aws_subnet.tcb_blog_public_subnet
+  description = "The private IP address of the main server instance."
+}

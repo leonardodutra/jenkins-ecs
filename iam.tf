@@ -24,3 +24,8 @@ resource "aws_iam_role" "test_role" {
     tag-key = "tag-value"
   }
 }
+
+output "role" {
+  value       = aws_iam_role.test_role
+  description = "The private IP address of the main server instance."
+}

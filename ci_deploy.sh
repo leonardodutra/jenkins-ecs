@@ -4,6 +4,7 @@
 ../../terraform.exe init --backend-config=backend.tfvars -reconfigure
 ../../terraform.exe plan -var-file=var.tfvars -lock=false
 ../../terraform.exe apply -var-file=var.tfvars -auto-approve
+../../terraform.exe output -json > ./infrastructure.json
 
 aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 34243243242342.dkr.ecr.us-east-1.amazonaws.com
 

@@ -23,3 +23,8 @@ resource "aws_security_group" "allow_tls" {
     Name = "allow_tls"
   }
 }
+
+output "security_group" {
+  value       = aws_security_group.allow_tls
+  description = "The private IP address of the main server instance."
+}

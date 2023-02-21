@@ -1,6 +1,7 @@
 import boto3
 import json
 import os
+import json
 #Variaveis do projeto
 cluster_ecs="MeuClusterECS"
 
@@ -17,11 +18,6 @@ response_register_task_definition = client.register_task_definition(
                 "image": "543443381312376709.dkr.ecr.us-east-1.amazonaws.com/bar:latest",
                 "cpu": 256,
                 "portMappings": [
-                    {
-                        "containerPort": 8080,
-                        "hostPort": 0,
-                        "protocol": "tcp"
-                    }
                 ],
                 "essential": True,
                 "environment": [],
@@ -37,7 +33,7 @@ response_register_task_definition = client.register_task_definition(
                 }
             }
         ],
-        executionRoleArn="arn:aws:iam::5543543176709:role/test_role",
+        executionRoleArn="arn:aws:iam::588338176709:role/test_role",
         family= "AWSSampleApp2",
         networkMode="awsvpc",
         requiresCompatibilities= [
@@ -46,6 +42,16 @@ response_register_task_definition = client.register_task_definition(
         cpu= "256",
         memory= "512")
 #print(response_register_task_definition["taskDefinition"]["taskDefinitionArn"])
+
+f = open('infrastructure.json')
+data = json.load(f)
+security_group_id = data['security_group']['value']['id']
+vpc_id = data['vpc']['value']['id']
+subnet_id = data['subnet']['value']['id']
+f.close()
+
+
+
 
 response = client.run_task(
     taskDefinition=response_register_task_definition["taskDefinition"]["taskDefinitionArn"],
@@ -56,10 +62,10 @@ response = client.run_task(
     networkConfiguration={
         'awsvpcConfiguration': {
             'subnets': [
-                'subnet-0e9088435dcb0b49b',
+                subnet_id,
             ],
             'assignPublicIp': 'ENABLED',
-            'securityGroups': ["sg-07d75681cf3704d62"]
+            'securityGroups': [security_group_id]
         }
     }
 )
@@ -72,16 +78,15 @@ response = client.create_service(cluster=cluster_ecs,
                 networkConfiguration={
                     'awsvpcConfiguration': {
                         'subnets': [
-                            'subnet-0e9088435dcb0b49b',
+                            subnet_id,
                         ],
                         'assignPublicIp': 'ENABLED',
-                        'securityGroups': ["sg-07d75681cf3704d62"]
+                        'securityGroups': [security_group_id]
                     }
                 },
                 launchType='FARGATE',
             )
 #print(json.dumps(response, indent=4, default=str))
-
 
 
 

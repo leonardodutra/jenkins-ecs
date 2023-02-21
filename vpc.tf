@@ -7,3 +7,7 @@ resource "aws_vpc" "tcb_blog_vpc" {
     Name = "tcb_blog_vpc"
   }
 }
+output "vpc" {
+  value       = aws_vpc.tcb_blog_vpc
+  description = "The private IP address of the main server instance."
+}
