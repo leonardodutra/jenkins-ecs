@@ -1,0 +1,13 @@
+ApiVersion: serving.ecs/v1
+kind: Function
+metadata:
+  cluster: ecs-cluster-fargate-tools
+  service: service1
+  taskdefinition: task-ms-bureau
+spec:
+  code:
+    repository: 9248749242.ecr.sa-sa-east-1.amazonaws.com/kyc-ms-federal-bureau-snapshot
+    tag: 1.1.1
+    enviroment:
+      - name: "variavel"
+        value: "valordavariavel"
