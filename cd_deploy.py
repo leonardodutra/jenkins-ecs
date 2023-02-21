@@ -14,7 +14,7 @@ response_register_task_definition = client.register_task_definition(
         containerDefinitions=[
             {
                 "name": "AmazonSampleImage",
-                "image": "54344338176709.dkr.ecr.us-east-1.amazonaws.com/bar:latest",
+                "image": "543443381312376709.dkr.ecr.us-east-1.amazonaws.com/bar:latest",
                 "cpu": 256,
                 "portMappings": [
                     {
