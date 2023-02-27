@@ -96,7 +96,7 @@
     stage('DOCKER BUILD - jenkins-master') {
       steps {
 
-        dir('services/charts/jenkins/build/jenkins-master') {
+        dir('./') {
             sh "docker build  --network host -t jenkins-master ."
                     }
 
@@ -106,7 +106,7 @@
       steps {
             
             script{
-                sh "docker tag jenkins-master:latest 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-master:latest"
+                sh "#docker tag jenkins-master:latest 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-master:latest"
             }
             
       }
@@ -114,7 +114,7 @@
     stage('DOCKER PUSH - jenkins-master') {
       steps {
             script{
-                sh "docker push 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-master:latest"
+                sh "#docker push 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-master:latest"
             }
         
 
@@ -124,7 +124,7 @@
       steps {
 
         dir('services/charts/jenkins/build/jenkins-slave-application-tests') {
-            sh "docker build  --network host -t jenkins-slave-application-tests ."
+            sh "#docker build  --network host -t jenkins-slave-application-tests ."
                     }
 
       }
@@ -133,7 +133,7 @@
       steps {
             
             script{
-                sh "docker tag jenkins-slave-application-tests:latest 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-application-tests:latest"
+                sh "#docker tag jenkins-slave-application-tests:latest 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-application-tests:latest"
             }
             
       }
@@ -141,7 +141,7 @@
     stage('DOCKER PUSH - jenkins-slave-application-tests') {
       steps {
             script{
-                sh "docker push 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-application-tests:latest"
+                sh "#docker push 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-application-tests:latest"
             }
         
 
@@ -151,7 +151,7 @@
       steps {
 
         dir('services/charts/jenkins/build/jenkins-slave-ciandt-ci') {
-            sh "docker build  --network host -t jenkins-slave-ciandt-ci ."
+            sh "#docker build  --network host -t jenkins-slave-ciandt-ci ."
                     }
 
       }
@@ -160,7 +160,7 @@
       steps {
             
             script{
-                sh "docker tag jenkins-slave-ciandt-ci:latest 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-ciandt-ci:latest"
+                sh "#docker tag jenkins-slave-ciandt-ci:latest 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-ciandt-ci:latest"
             }
             
       }
@@ -168,7 +168,7 @@
     stage('DOCKER PUSH - jenkins-slave-ciandt-ci') {
       steps {
             script{
-                sh "docker push 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-ciandt-ci:latest"
+                sh "#docker push 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-ciandt-ci:latest"
             }
         
 
@@ -178,7 +178,7 @@
       steps {
 
         dir('services/charts/jenkins/build/jenkins-slave-ciandt-flutter') {
-            sh "docker build  --network host -t jenkins-slave-ciandt-flutter ."
+            sh "#docker build  --network host -t jenkins-slave-ciandt-flutter ."
                     }
 
       }
@@ -187,7 +187,7 @@
       steps {
             
             script{
-                sh "docker tag jenkins-slave-ciandt-flutter:latest 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-ciandt-flutter:latest"
+                sh "#docker tag jenkins-slave-ciandt-flutter:latest 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-ciandt-flutter:latest"
             }
             
       }
@@ -195,7 +195,7 @@
     stage('DOCKER PUSH - jenkins-slave-ciandt-flutter') {
       steps {
             script{
-                sh "docker push 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-ciandt-flutter:latest"
+                sh "#docker push 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-ciandt-flutter:latest"
             }
         
 
@@ -205,7 +205,7 @@
       steps {
 
         dir('services/charts/jenkins/build/jenkins-slave-ics') {
-            sh "docker build  --network host -t jenkins-slave-ics ."
+            sh "#docker build  --network host -t jenkins-slave-ics ."
                     }
 
       }
@@ -214,7 +214,7 @@
       steps {
             
             script{
-                sh "docker tag jenkins-slave-ics:latest 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-ics:latest"
+                sh "#docker tag jenkins-slave-ics:latest 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-ics:latest"
             }
             
       }
@@ -222,7 +222,7 @@
     stage('DOCKER PUSH - jenkins-slave-ics') {
       steps {
             script{
-                sh "docker push 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-ics:latest"
+                sh "#docker push 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-ics:latest"
             }
         
 
@@ -232,7 +232,7 @@
       steps {
 
         dir('services/charts/jenkins/build/jenkins-slave-rex') {
-            sh "docker build  --network host -t jenkins-slave-rex ."
+            sh "#docker build  --network host -t jenkins-slave-rex ."
                     }
 
       }
@@ -241,7 +241,7 @@
       steps {
             
             script{
-                sh "docker tag jenkins-slave-rex:latest 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-rex:latest"
+                sh "#docker tag jenkins-slave-rex:latest 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-rex:latest"
             }
             
       }
@@ -249,7 +249,7 @@
     stage('DOCKER PUSH - jenkins-slave-rex') {
       steps {
             script{
-                sh "docker push 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-rex:latest"
+                sh "#docker push 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-rex:latest"
             }
         
 
@@ -259,7 +259,7 @@
       steps {
 
         dir('services/charts/jenkins/build/jenkins-slave-tools-all-aws') {
-            sh "docker build  --network host -t jenkins-slave-tools-all-aws ."
+            sh "#docker build  --network host -t jenkins-slave-tools-all-aws ."
                     }
 
       }
@@ -268,7 +268,7 @@
       steps {
             
             script{
-                sh "docker tag jenkins-slave-tools-all-aws:latest 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-tools-all-aws:latest"
+                sh "#docker tag jenkins-slave-tools-all-aws:latest 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-tools-all-aws:latest"
             }
             
       }
@@ -276,7 +276,7 @@
     stage('DOCKER PUSH - jenkins-slave-tools-all-aws') {
       steps {
             script{
-                sh "docker push 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-tools-all-aws:latest"
+                sh "#docker push 355331038472.dkr.ecr.us-east-1.amazonaws.com/jenkins-slave-tools-all-aws:latest"
             }
         
 
@@ -285,18 +285,10 @@
     stage('eks update-kubeconfig') {
       steps {
             script{
-                sh 'aws eks --region us-east-1 update-kubeconfig --name genesis-hom'
+                sh '#aws eks --region us-east-1 update-kubeconfig --name genesis-hom'
             }
       }
     }
   }
-    post {
-        success {
-            discordSend description: "build", link: BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME, webhookURL: URL_DISCORD_HML
-        }
-        failure {
-            discordSend description: "Ops, o job de teste do projeto na branch falhou!", link: BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME, webhookURL: URL_DISCORD_HML
-        }
-    }
 }
 
