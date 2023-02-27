@@ -27,6 +27,7 @@
       steps {
 
         dir('./') {
+            sh "./terraform fmt"
             sh "./terraform init --backend-config=backend.tfvars -reconfigure"
                     }
 
