@@ -1,5 +1,5 @@
-resource "aws_ecr_repository" "foo" {
-  name                 = "bar"
+resource "aws_ecr_repository" "jenkins" {
+  name                 = "jenkins"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
