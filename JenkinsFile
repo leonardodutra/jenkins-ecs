@@ -56,7 +56,7 @@
       steps {
 
         dir('./') {
-            sh "./terraform apply -var-file=var.tfvars -auto-approve"
+            sh "#./terraform apply -var-file=var.tfvars -auto-approve"
                     }
 
       }
