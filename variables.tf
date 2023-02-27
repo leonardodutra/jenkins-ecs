@@ -1,0 +1,1 @@
+variable "ecs_repository" {}
