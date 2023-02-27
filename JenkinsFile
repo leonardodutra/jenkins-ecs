@@ -6,7 +6,7 @@
     }
   environment {
         GIT_REPO="https://github.com/leonardodutra/jenkins-ecs.git"
-        GIT_BRANCH="master"
+        GIT_BRANCH="main"
         PROJECT_NAME = "${PROJECT_NAME}"
   }
   stages {
