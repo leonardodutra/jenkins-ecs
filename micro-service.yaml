@@ -11,10 +11,10 @@ spec:
     container_memory: "1024"
     desiredCount: 2
     container_memory_Reservation: "1024"
-    subnet: subnet-02232323
-    security_group: ["sg-388ew8rwe87"]
-    executionRoleArn: ""
-    taskRoleArn: ""
+    subnet: subnet-02377b63da9625a82
+    security_group: ["sg-0321040bfa23ab482"]
+    executionRoleArn: "arn:aws:iam::588338176709:role/ecsInstanceRole"
+    taskRoleArn: "arn:aws:iam::588338176709:role/ecsInstanceRole"
     launch_type: "FARGATE"
     logConfiguration:
       logDriver: "awslogs"

@@ -21,10 +21,17 @@ response = client.create_cluster(clusterName=cluster_name)
 response_register_task_definition = client.register_task_definition(
         containerDefinitions=[
             {
-                "name": "AmazonSampleImage",
-                "image": "543443381312376709.dkr.ecr.us-east-1.amazonaws.com/bar:latest",
+                "name": yaml_file["metadata"]['container_name'],
+                "image": yaml_file["spec"]['code']['container_image'] + ":" + yaml_file["spec"]['code']['tag'],
                 "cpu": 256,
+                "memory": 1024,
+                "memoryReservation": 1024,
                 "portMappings": [
+                    {
+                        "containerPort": 8080,
+                        "hostPort": 8080,
+                        "protocol": "tcp"
+                    }
                 ],
                 "essential": True,
                 "environment": [],
@@ -40,22 +47,22 @@ response_register_task_definition = client.register_task_definition(
                 }
             }
         ],
-        executionRoleArn="arn:aws:iam::588338176709:role/test_role",
-        family= "AWSSampleApp2",
+        executionRoleArn=yaml_file["spec"]['code']['executionRoleArn'],
+        family=yaml_file["metadata"]['taskdefinition'],
         networkMode="awsvpc",
         requiresCompatibilities= [
             "FARGATE"
         ],
         cpu= "256",
-        memory= "512")
+        memory= "1024")
 #print(response_register_task_definition["taskDefinition"]["taskDefinitionArn"])
 
-f = open('infrastructure.json')
-data = json.load(f)
-security_group_id = data['security_group']['value']['id']
-vpc_id = data['vpc']['value']['id']
-subnet_id = data['subnet']['value']['id']
-f.close()
+#f = open('infrastructure.json')
+#data = json.load(f)
+#security_group_id = data['security_group']['value']['id']
+#vpc_id = data['vpc']['value']['id']
+#subnet_id = data['subnet']['value']['id']
+#f.close()
 
 
 
@@ -69,26 +76,26 @@ response = client.run_task(
     networkConfiguration={
         'awsvpcConfiguration': {
             'subnets': [
-                subnet_id,
+                yaml_file["spec"]['code']['subnet'],
             ],
             'assignPublicIp': 'ENABLED',
-            'securityGroups': [security_group_id]
+            'securityGroups': yaml_file["spec"]['code']['security_group']
         }
     }
 )
 #print(json.dumps(response, indent=4, default=str))
 
 response = client.create_service(cluster=cluster_name, 
-                serviceName="SimpleWebServer",
+                serviceName=yaml_file["metadata"]['taskdefinition'],
                 taskDefinition=response_register_task_definition["taskDefinition"]["taskDefinitionArn"],
                 desiredCount=2,
                 networkConfiguration={
                     'awsvpcConfiguration': {
                         'subnets': [
-                            subnet_id,
+                            yaml_file["spec"]['code']['subnet'],
                         ],
                         'assignPublicIp': 'ENABLED',
-                        'securityGroups': [security_group_id]
+                        'securityGroups': yaml_file["spec"]['code']['security_group']
                     }
                 },
                 launchType='FARGATE',
