@@ -1,13 +1,29 @@
-ApiVersion: serving.ecs/v1
-kind: Function
 metadata:
-  cluster: ecs-cluster-fargate-tools
+  cluster: MeuClusterECS
   service: service1
-  taskdefinition: task-ms-bureau
+  taskdefinition: service1
+  container_name: service1
 spec:
   code:
-    repository: 9248749242.ecr.sa-sa-east-1.amazonaws.com/kyc-ms-federal-bureau-snapshot
-    tag: 1.1.1
+    container_image: 9248749242.ecr.sa-sa-east-1.amazonaws.com/bar
+    tag: latest
+    container_cpu: "256"
+    container_memory: "1024"
+    desiredCount: 2
+    container_memory_Reservation: "1024"
+    subnet: subnet-02232323
+    security_group: ["sg-388ew8rwe87"]
+    executionRoleArn: ""
+    taskRoleArn: ""
+    launch_type: "FARGATE"
+    logConfiguration:
+      logDriver: "awslogs"
+      options:
+        awslogs-group: awslogs-group
+        awslogs-region: us-east-1
+        awslogs-stream-prefix: ecs
     enviroment:
       - name: "variavel"
+        value: "valordavariavel"
+      - name: "variavel2"
         value: "valordavariavel"
