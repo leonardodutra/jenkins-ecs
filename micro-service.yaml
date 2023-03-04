@@ -5,12 +5,12 @@ metadata:
   container_name: service1
 spec:
   code:
-    container_image: 588338176709.ecr.sa-sa-east-1.amazonaws.com/bar
+    container_image: 588338176709.dkr.ecr.us-east-1.amazonaws.com/bar
     tag: latest
-    container_cpu: "256"
-    container_memory: "1024"
-    desiredCount: 2
-    container_memory_Reservation: "1024"
+    container_cpu: "1024"
+    container_memory: "4096"
+    desiredCount: 1
+    container_memory_Reservation: "4096"
     subnet: subnet-02377b63da9625a82
     security_group: ["sg-0321040bfa23ab482"]
     executionRoleArn: "arn:aws:iam::588338176709:role/ECS"

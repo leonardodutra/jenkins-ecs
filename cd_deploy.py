@@ -23,9 +23,9 @@ response_register_task_definition = client.register_task_definition(
             {
                 "name": yaml_file["metadata"]['container_name'],
                 "image": yaml_file["spec"]['code']['container_image'] + ":" + yaml_file["spec"]['code']['tag'],
-                "cpu": 256,
-                "memory": 1024,
-                "memoryReservation": 1024,
+                "cpu": 512,
+                "memory": 2048,
+                "memoryReservation": 2048,
                 "portMappings": [
                     {
                         "containerPort": 8080,
@@ -40,7 +40,7 @@ response_register_task_definition = client.register_task_definition(
                 "logConfiguration": {
                     "logDriver": "awslogs",
                     "options": {
-                        "awslogs-group": "/ecs/",
+                        "awslogs-group": "ecs",
                         "awslogs-region": "us-east-1",
                         "awslogs-stream-prefix": "ecs"
                     }
@@ -53,8 +53,8 @@ response_register_task_definition = client.register_task_definition(
         requiresCompatibilities= [
             "FARGATE"
         ],
-        cpu= "256",
-        memory= "1024")
+        cpu= "512",
+        memory= "2048")
 #print(response_register_task_definition["taskDefinition"]["taskDefinitionArn"])
 
 #f = open('infrastructure.json')
@@ -88,7 +88,7 @@ response = client.run_task(
 response = client.create_service(cluster=cluster_name, 
                 serviceName=yaml_file["metadata"]['taskdefinition'],
                 taskDefinition=response_register_task_definition["taskDefinition"]["taskDefinitionArn"],
-                desiredCount=2,
+                desiredCount=1,
                 networkConfiguration={
                     'awsvpcConfiguration': {
                         'subnets': [
