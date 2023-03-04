@@ -40,7 +40,7 @@ response_register_task_definition = client.register_task_definition(
                 "logConfiguration": {
                     "logDriver": "awslogs",
                     "options": {
-                        "awslogs-group": "/ecs/AWSSampleApp",
+                        "awslogs-group": "/ecs/",
                         "awslogs-region": "us-east-1",
                         "awslogs-stream-prefix": "ecs"
                     }
