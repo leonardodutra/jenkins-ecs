@@ -21,7 +21,16 @@ elb = boto3.client("elbv2", region_name=DEPLOY_AWS_REGION)
 cluster_name=yaml_file["metadata"]['cluster']
 variables=yaml_file["spec"]['code']['environment']
 
+response_cluster = client.create_cluster(clusterName=cluster_name)
+response_target_group = elb.create_target_group(Name=cluster_name, TargetType='ip', Protocol='HTTP', Port=5000, VpcId=vpcid)
+response_load_balancer = elb.create_load_balancer(Name=cluster_name, Subnets = subnets, Security_groups = security_groups, Scheme='internal', Type = 'application', IpAddressType = 'ipv4')
+
 response = client.create_cluster(clusterName=cluster_name)
+response = client.create_cluster(clusterName=cluster_name)
+
+
+
+
 #print(json.dumps(response, indent=4))
 
 response_register_task_definition = client.register_task_definition(
