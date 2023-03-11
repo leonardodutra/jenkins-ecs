@@ -19,6 +19,8 @@ elb = boto3.client("elbv2", region_name=DEPLOY_AWS_REGION)
 
 
 cluster_name=yaml_file["metadata"]['cluster']
+variables=yaml_file["spec"]['code']['environment']
+
 response = client.create_cluster(clusterName=cluster_name)
 #print(json.dumps(response, indent=4))
 
