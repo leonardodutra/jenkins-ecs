@@ -12,8 +12,12 @@ with open("micro-service.yaml", "r") as stream:
 print(yaml_file["metadata"]['cluster'])
 
 DEPLOY_AWS_REGION = os.getenv('DEPLOY_AWS_REGION')
+mixed=[]
 
 client = boto3.client("ecs", region_name=DEPLOY_AWS_REGION)
+elb = boto3.client("elbv2", region_name=DEPLOY_AWS_REGION)
+
+
 cluster_name=yaml_file["metadata"]['cluster']
 response = client.create_cluster(clusterName=cluster_name)
 #print(json.dumps(response, indent=4))
