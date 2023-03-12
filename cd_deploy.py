@@ -25,7 +25,7 @@ response_cluster = client.create_cluster(clusterName=cluster_name)
 response_target_group = elb.create_target_group(Name=cluster_name, TargetType='ip', Protocol='HTTP', Port=5000, VpcId=vpcid)
 response_load_balancer = elb.create_load_balancer(Name=cluster_name, Subnets = subnets, Security_groups = security_groups, Scheme='internal', Type = 'application', IpAddressType = 'ipv4')
 
-response = client.create_cluster(clusterName=cluster_name)
+response = elb.create_listener(DefaultActions=[{'TargetGroupArn': TargetGroupArn, 'Type': 'forward'}], LoadBalancerArn = LoadBalancerArn, Port=5000, Protocol='HTTP')
 response = client.create_cluster(clusterName=cluster_name)
 
 
