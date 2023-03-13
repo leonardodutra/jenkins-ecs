@@ -1,18 +1,21 @@
 metadata:
-  cluster: MeuClusterECS
-  service: service1
-  taskdefinition: service1
-  container_name: service1
+  cluster: service6
+  service: service6
+  taskdefinition: service6
+  container_name: service6
+  container_port: 8080
 spec:
   code:
-    container_image: 588338176709.dkr.ecr.us-east-1.amazonaws.com/bar
+    container_image: 588338176709.dkr.ecr.sa-east-1.amazonaws.com/nginx
     tag: latest
     container_cpu: "1024"
     container_memory: "4096"
     desiredCount: 1
     container_memory_Reservation: "4096"
-    subnet: subnet-02377b63da9625a82
-    security_group: ["sg-0321040bfa23ab482"]
+    vpc: vpc-03265b309c4822713
+    subnet: subnet-033839842f6b8155c
+    subnets: ["subnet-033839842f6b8155c", "subnet-0523c20d35a60a149"]
+    security_group: ["sg-09cb4c9c1cca322a4"]
     executionRoleArn: "arn:aws:iam::588338176709:role/ECS"
     taskRoleArn: "arn:aws:iam::588338176709:role/ECS"
     launch_type: "FARGATE"
@@ -20,9 +23,9 @@ spec:
       logDriver: "awslogs"
       options:
         awslogs-group: awslogs-group
-        awslogs-region: us-east-1
+        awslogs-region: sa-east-1
         awslogs-stream-prefix: ecs
-    enviroment:
+    environment:
       - name: "variavel"
         value: "valordavariavel"
       - name: "variavel2"

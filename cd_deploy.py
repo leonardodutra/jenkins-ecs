@@ -20,13 +20,21 @@ elb = boto3.client("elbv2", region_name=DEPLOY_AWS_REGION)
 
 cluster_name=yaml_file["metadata"]['cluster']
 variables=yaml_file["spec"]['code']['environment']
+vpcid=yaml_file["spec"]['code']['vpc']
+subnets=yaml_file["spec"]['code']['subnets']
+security_group=yaml_file["spec"]['code']['security_group']
+container_name = yaml_file["metadata"]['container_name']
 
 response_cluster = client.create_cluster(clusterName=cluster_name)
-response_target_group = elb.create_target_group(Name=cluster_name, TargetType='ip', Protocol='HTTP', Port=5000, VpcId=vpcid)
-response_load_balancer = elb.create_load_balancer(Name=cluster_name, Subnets = subnets, Security_groups = security_groups, Scheme='internal', Type = 'application', IpAddressType = 'ipv4')
+response_target_group = elb.create_target_group(Name=cluster_name, TargetType='ip', Protocol='HTTP', Port=8080, VpcId=vpcid, )
+response_load_balancer = elb.create_load_balancer(Name=cluster_name, Subnets = subnets, SecurityGroups = security_group, Scheme='internal', Type = 'application', IpAddressType = 'ipv4')
 
-response = elb.create_listener(DefaultActions=[{'TargetGroupArn': TargetGroupArn, 'Type': 'forward'}], LoadBalancerArn = LoadBalancerArn, Port=5000, Protocol='HTTP')
-response = client.create_cluster(clusterName=cluster_name)
+
+TargetGroupArn = response_target_group['TargetGroups'][0]["TargetGroupArn"]
+LoadBalancerArn = response_load_balancer['LoadBalancers'][0]["LoadBalancerArn"]
+
+
+response = elb.create_listener(DefaultActions=[{'TargetGroupArn': TargetGroupArn, 'Type': 'forward'}], LoadBalancerArn = LoadBalancerArn, Port=8080, Protocol='HTTP')
 
 
 
@@ -56,7 +64,7 @@ response_register_task_definition = client.register_task_definition(
                     "logDriver": "awslogs",
                     "options": {
                         "awslogs-group": "ecs",
-                        "awslogs-region": "us-east-1",
+                        "awslogs-region": "sa-east-1",
                         "awslogs-stream-prefix": "ecs"
                     }
                 }
@@ -104,6 +112,7 @@ response = client.create_service(cluster=cluster_name,
                 serviceName=yaml_file["metadata"]['taskdefinition'],
                 taskDefinition=response_register_task_definition["taskDefinition"]["taskDefinitionArn"],
                 desiredCount=1,
+                loadBalancers=[{'targetGroupArn': TargetGroupArn,'containerName': container_name, 'containerPort': 8080 }],
                 networkConfiguration={
                     'awsvpcConfiguration': {
                         'subnets': [

@@ -1,1 +1,1 @@
-variable "ecs_repository" {}
+#variable "ecs_repository" {}

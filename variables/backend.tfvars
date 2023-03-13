@@ -1,4 +1,4 @@
-ecs_repository = "jenkins"
+#ecs_repository = "nginx"
 vpc_id = "vpc-b6edbedf"
 app_subnet_1 = "subnet-be85a2d7"
 app_subnet_2 = "subnet-1e1c3758"

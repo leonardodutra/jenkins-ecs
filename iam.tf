@@ -1,5 +1,5 @@
-resource "aws_iam_role" "test_role" {
-  name = "test_role"
+resource "aws_iam_role" "role" {
+  name = "role"
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
@@ -26,6 +26,6 @@ resource "aws_iam_role" "test_role" {
 }
 
 output "role" {
-  value       = aws_iam_role.test_role
+  value       = aws_iam_role.role
   description = "The private IP address of the main server instance."
 }
